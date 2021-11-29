@@ -13,5 +13,5 @@ fun main() {
     input3.substringBefore("-")
     input3.substringAfter("-")
     input3.substringBeforeLast("-")
-
+    // test
 }
