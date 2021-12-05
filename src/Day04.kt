@@ -41,6 +41,7 @@ fun main() {
             val winner = winners.last()
             winners.add(winner)
             val unmarked  = boxes[winner].map { it.filter {it >= 0}.sum()}.sum()
+            println("$unmarked $n")
             println("partA(first)/partB(last): ${unmarked*n}")
             if (winners.toSet().size == boxes.size)
                 break
