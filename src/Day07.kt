@@ -6,7 +6,7 @@ fun main() {
        // "day07_.txt"
        "day07.txt"
     ).readLines().map{it.split(",")}
-    var a = input[0].map{it.toInt()}.toIntArray().toMutableList()
+    val a = input[0].map{it.toInt()}.toIntArray().toMutableList()
     val partA =  (a.minOrNull()?.rangeTo(a.maxOrNull()!!)!!).map { pos ->
         a.map { Math.abs(it - pos)}.sum()
     }.minOrNull()
