@@ -2,7 +2,8 @@ import java.io.File
 
 fun main() {
     val inp: List<List<Int>> = File(
-       //   "day15_.txt"
+        //   "day15__.txt"
+        //   "day15_.txt"
         "day15.txt"
     ).readLines().map { it.toCharArray().map { it.digitToInt()} }
     val size = inp.size
