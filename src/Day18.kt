@@ -103,11 +103,17 @@ fun main() {
         }
     }
     println("partB: ${m.toList().maxOrNull()}")
+    // winczer
+//    val (aa, _) = parse("[[[0,[4,5]],[0,0]],[[[4,5],[2,6]],[9,5]]]")
+//    val (bb, _) = parse("[7,[[[3,7],[4,3]],[[6,3],[8,8]]]]")
+//    val cc = N(aa,bb).nf()
+//    println(cc)
 }
 
 fun P.nf() : P {
     var p = this
     while(true) {
+        //println(p)
         val (pexploded, explodePair) = p.explode(0)
         if (explodePair == null) {
             val (splitted, wasSplit) = pexploded.split()
