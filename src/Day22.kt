@@ -17,12 +17,10 @@ fun main() {
     val ys = mutableSetOf<Int>()
     val zs = mutableSetOf<Int>()
     for (l in inp) {
-        val xmin = l[1].toInt()
-        val xmax = l[2].toInt()
-        val ymin = l[3].toInt()
-        val ymax = l[4].toInt()
-        val zmin = l[5].toInt()
-        val zmax = l[6].toInt()
+        val (xmin,xmax) = Pair(l[1].toInt(), l[2].toInt())
+        val (ymin,ymax) = Pair(l[3].toInt(), l[4].toInt())
+        val (zmin,zmax) = Pair(l[5].toInt(),l[6].toInt())
+
         xs.add(xmin)
         xs.add(xmax+1)
         ys.add(ymin)
@@ -40,37 +38,24 @@ fun main() {
     val zssort = zs.toList().sorted()
     val xxx = Array(xssort.size) {Array(yssort.size) {Array(zssort.size) { 0 }}}
     for (l in inp) {
-        val xmin = l[1].toInt()
-        val xmax = l[2].toInt()+1
-        val ymin = l[3].toInt()
-        val ymax = l[4].toInt()+1
-        val zmin = l[5].toInt()
-        val zmax = l[6].toInt()+1
+        val (xmin,xmax) = Pair(l[1].toInt(), l[2].toInt()+1)
+        val (ymin,ymax) = Pair(l[3].toInt(), l[4].toInt()+1)
+        val (zmin,zmax) = Pair(l[5].toInt(),l[6].toInt()+1)
         for (xi in 0 until xssort.size-1)
             for (yi in 0 until yssort.size-1)
-                for (zi in 0 until zssort.size-1) {
-                    val xlo = xssort[xi]
-                    val xhi = xssort[xi+1]
-                    val ylo = yssort[yi]
-                    val yhi = yssort[yi+1]
-                    val zlo = zssort[zi]
-                    val zhi = zssort[zi+1]
-                    if (xmin <= xlo && xhi <= xmax && ymin <= ylo && yhi <= ymax && zmin <= zlo && zhi <= zmax)
+                for (zi in 0 until zssort.size-1)
+                    if (xmin <= xssort[xi] && xssort[xi+1] <= xmax && ymin <= yssort[yi] && yssort[yi+1] <= ymax && zmin <= zssort[zi] && zssort[zi+1] <= zmax)
                         xxx[xi][yi][zi] = if (l[0] == "on") 1 else 0
-                }
     }
-    var count = 0L
-    for (xi in 0 until xssort.size-1)
-        for (yi in 0 until yssort.size-1)
-            for (zi in 0 until zssort.size-1)
-                if (xxx[xi][yi][zi] > 0) {
-                    val xlo = xssort[xi]
-                    val xhi = xssort[xi+1]
-                    val ylo = yssort[yi]
-                    val yhi = yssort[yi+1]
-                    val zlo = zssort[zi]
-                    val zhi = zssort[zi+1]
-                    count += (xhi-xlo).toLong() * (yhi-ylo) * (zhi-zlo)
-                }
-    println("partB: $count")
+    val partB =
+    (0 until xssort.size-1).flatMap { xi ->
+        (0 until yssort.size-1).flatMap { yi ->
+            (0 until zssort.size-1).map { zi ->
+                if (xxx[xi][yi][zi] > 0)
+                    (xssort[xi+1]-xssort[xi]).toLong() * (yssort[yi+1]-yssort[yi]) * (zssort[zi+1]-zssort[zi])
+                else 0
+            }
+        }
+    }.sum()
+    println("partB: $partB")
 }
