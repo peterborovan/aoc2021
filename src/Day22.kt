@@ -9,7 +9,6 @@ fun main() {
         "day22.txt"
      //   "day22_.txt"
      //   "day22__.txt"  // 2758514936282235
-     // "day22___.txt"  //
     ).readLines().map { it.split(",")}
 
     val ons = mutableSetOf<Po>()
